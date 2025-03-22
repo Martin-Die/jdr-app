@@ -4,7 +4,6 @@ import { useCharacter } from '../hooks/useCharacter';
 import { CharacterIdentity } from './character/CharacterIdentity';
 import { CharacterStats } from './character/CharacterStats';
 import { CharacterSkills } from './character/CharacterSkills';
-import { DerivedStats } from './character/DerivedStats';
 
 export default function CharacterSheet() {
   const {
