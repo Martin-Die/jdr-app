@@ -1,6 +1,27 @@
 import { useState, useCallback, useEffect } from 'react';
 import { Character, DerivedStats } from '../types/Character';
 
+interface FileSystemHandle {
+  createWritable(): Promise<FileSystemWritableFileStream>;
+}
+
+interface FileSystemWritableFileStream {
+  write(data: Blob): Promise<void>;
+  close(): Promise<void>;
+}
+
+interface ShowFilePickerOptions {
+  types: Array<{
+    description: string;
+    accept: Record<string, string[]>;
+  }>;
+  suggestedName: string;
+}
+
+interface WindowWithFileSystem extends Window {
+  showSaveFilePicker(options: ShowFilePickerOptions): Promise<FileSystemHandle>;
+}
+
 const defaultCharacter: Character = {
   nomJoueur: '',
   nom: '',
@@ -123,14 +144,14 @@ export const useCharacter = () => {
         };
 
         try {
-          const fileHandle = await (window as any).showSaveFilePicker(options);
+          const fileHandle = await (window as WindowWithFileSystem).showSaveFilePicker(options);
           const writable = await fileHandle.createWritable();
           await writable.write(blob);
           await writable.close();
           alert('Personnage sauvegardé avec succès !');
-        } catch (err: any) {
+        } catch (err: unknown) {
           // Ne pas afficher l'erreur si c'est une annulation par l'utilisateur
-          if (err.name !== 'AbortError') {
+          if (err instanceof Error && err.name !== 'AbortError') {
             console.error('Erreur lors de la sauvegarde:', err);
             alert('Erreur lors de la sauvegarde du personnage');
           }

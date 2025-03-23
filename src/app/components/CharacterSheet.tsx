@@ -9,7 +9,6 @@ export default function CharacterSheet() {
   const {
     character,
     derivedStats,
-    calculerStats,
     handleInputChange,
     ajouterCompetence,
     supprimerCompetence,
