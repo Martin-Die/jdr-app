@@ -16,7 +16,8 @@ export default function CharacterSheet() {
     supprimerCompetence,
     handleCompetenceChange,
     sauvegarder,
-    charger
+    charger,
+    calculerPointsDisponibles
   } = useCharacter();
 
   return (
@@ -33,6 +34,7 @@ export default function CharacterSheet() {
         <CharacterStats
           character={character}
           onInputChange={handleInputChange}
+          pointsDisponibles={calculerPointsDisponibles()}
         />
 
         <CharacterSkills

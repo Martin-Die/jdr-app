@@ -42,6 +42,11 @@ const defaultCharacter: Character = {
   pouvoir: 0
 };
 
+const POINTS_INITIAUX = 4;
+const POINTS_PAR_NIVEAU = 4;
+const MIN_STAT = -3;
+const MAX_STAT = 3;
+
 export const useCharacter = () => {
   const [character, setCharacter] = useState<Character>(defaultCharacter);
   const [derivedStats, setDerivedStats] = useState<DerivedStats>({
@@ -97,20 +102,77 @@ export const useCharacter = () => {
     });
   }, [character]);
 
+  const calculerPointsDisponibles = useCallback(() => {
+    const pointsBase = POINTS_INITIAUX + (character.niveau - 1) * POINTS_PAR_NIVEAU;
+    const stats = ['force', 'agilite', 'perception', 'constitution', 'esprit', 'charisme', 'pouvoir'];
+    const pointsUtilises = stats.reduce((total, stat) => {
+      const valeur = character[stat as keyof Character] as number;
+      // Les points positifs soustraient du total
+      // Les points négatifs ajoutent au total
+      return total + (valeur > 0 ? valeur : 0);
+    }, 0);
+    const pointsGagnes = stats.reduce((total, stat) => {
+      const valeur = character[stat as keyof Character] as number;
+      // Les points négatifs ajoutent au total
+      return total + (valeur < 0 ? Math.abs(valeur) : 0);
+    }, 0);
+    return pointsBase - pointsUtilises + pointsGagnes;
+  }, [character]);
+
+  const handleStatChange = useCallback((id: string, value: number) => {
+    const statKey = id as keyof Character;
+    const ancienneValeur = character[statKey] as number;
+    const pointsDisponibles = calculerPointsDisponibles();
+    
+    // Calculer la différence en points
+    let difference = 0;
+    if (value > 0) {
+      // Si on passe à une valeur positive, on soustrait les points
+      difference = value - (ancienneValeur > 0 ? ancienneValeur : 0);
+    } else if (value < 0) {
+      // Si on passe à une valeur négative, on ajoute les points
+      difference = Math.abs(value) - (ancienneValeur < 0 ? Math.abs(ancienneValeur) : 0);
+    } else {
+      // Si on passe à 0, on récupère les points de l'ancienne valeur
+      difference = ancienneValeur > 0 ? -ancienneValeur : Math.abs(ancienneValeur);
+    }
+
+    // Vérifier si le changement est valide uniquement pour les valeurs positives
+    if (value > ancienneValeur && difference > pointsDisponibles) {
+      alert('Points de caractéristiques insuffisants');
+      return;
+    }
+
+    // Vérifier uniquement la limite minimale du pouvoir
+    if (statKey === 'pouvoir' && value < 0) {
+      alert('Le pouvoir ne peut pas être négatif');
+      return;
+    }
+
+    setCharacter(prev => ({
+      ...prev,
+      [statKey]: value
+    }));
+  }, [character, calculerPointsDisponibles]);
+
   // Calculer automatiquement les stats dérivées quand les caractéristiques changent
   useEffect(() => {
     calculerStats();
   }, [character, calculerStats]);
 
   const handleInputChange = useCallback((id: string, value: string | number) => {
-    setCharacter(prev => ({
-      ...prev,
-      [id]: value === '' ? '' :
-        ['taille', 'poids', 'niveau', 'force', 'agilite', 'perception', 'constitution', 'esprit', 'charisme', 'pouvoir'].includes(id)
-          ? Number(value)
-          : value
-    }));
-  }, []);
+    if (['force', 'agilite', 'perception', 'constitution', 'esprit', 'charisme', 'pouvoir'].includes(id)) {
+      handleStatChange(id, Number(value));
+    } else {
+      setCharacter(prev => ({
+        ...prev,
+        [id]: value === '' ? '' :
+          ['taille', 'poids', 'niveau'].includes(id)
+            ? Number(value)
+            : value
+      }));
+    }
+  }, [handleStatChange]);
 
   const ajouterCompetence = useCallback(() => {
     setCharacter(prev => ({
@@ -256,6 +318,7 @@ export const useCharacter = () => {
     supprimerCompetence,
     handleCompetenceChange,
     sauvegarder,
-    charger
+    charger,
+    calculerPointsDisponibles
   };
 }; 

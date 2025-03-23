@@ -18,7 +18,7 @@ export const CharacterIdentity = ({ character, onInputChange }: CharacterIdentit
   return (
     <div className="identity-section">
       <h2>Identité</h2>
-      
+
       <div className="form-group">
         <label htmlFor="nomJoueur">Nom du joueur:</label>
         <input
@@ -38,20 +38,6 @@ export const CharacterIdentity = ({ character, onInputChange }: CharacterIdentit
           value={character.nom}
           onChange={handleChange}
           placeholder="Entrez le nom du personnage"
-        />
-      </div>
-
-      <div className="form-group">
-        <label htmlFor="niveau">Niveau:</label>
-        <input
-          type="number"
-          id="niveau"
-          value={character.niveau || ''}
-          onChange={handleChange}
-          onWheel={handleWheel}
-          placeholder="Niveau du personnage"
-          min="1"
-          max="20"
         />
       </div>
 

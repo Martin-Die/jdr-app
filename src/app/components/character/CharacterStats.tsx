@@ -2,15 +2,19 @@ import { Character } from '../../types/Character';
 
 interface CharacterStatsProps {
   character: Character;
-  onInputChange: (id: string, value: string | number) => void;
+  onInputChange: (id: string, value: number) => void;
+  pointsDisponibles: number;
 }
 
 type StatKey = 'force' | 'agilite' | 'perception' | 'constitution' | 'esprit' | 'charisme' | 'pouvoir';
 
-export const CharacterStats = ({ character, onInputChange }: CharacterStatsProps) => {
+const MIN_STAT = -3;
+const MAX_STAT = 3;
+const MAX_LEVEL = 10;
+
+export const CharacterStats = ({ character, onInputChange, pointsDisponibles }: CharacterStatsProps) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
-    // Si la valeur est vide, on envoie une chaîne vide, sinon on convertit en nombre
     onInputChange(id, value === '' ? 0 : Number(value));
   };
 
@@ -25,7 +29,17 @@ export const CharacterStats = ({ character, onInputChange }: CharacterStatsProps
 
   const handleDecrement = (id: StatKey) => {
     const currentValue = character[id] || 0;
+    if (id === 'pouvoir' && currentValue <= 0) return;
     onInputChange(id, currentValue - 1);
+  };
+
+  const handleLevelChange = (increment: boolean) => {
+    const currentLevel = character.niveau || 1;
+    const newLevel = increment ? currentLevel + 1 : currentLevel - 1;
+
+    if (newLevel >= 1 && newLevel <= MAX_LEVEL) {
+      onInputChange('niveau', newLevel);
+    }
   };
 
   const stats = [
@@ -42,6 +56,42 @@ export const CharacterStats = ({ character, onInputChange }: CharacterStatsProps
     <div className="stats-section">
       <h2>Caractéristiques</h2>
 
+      <div className="level-section">
+        <label htmlFor="niveau">Niveau:</label>
+        <div className="stat-input-group">
+          <button
+            className="stat-button"
+            onClick={() => handleLevelChange(false)}
+            aria-label="Diminuer le niveau"
+            disabled={character.niveau <= 1}
+          >
+            -
+          </button>
+          <input
+            type="number"
+            id="niveau"
+            value={character.niveau || 1}
+            onChange={handleChange}
+            onWheel={handleWheel}
+            placeholder="Niveau"
+            min={1}
+            max={MAX_LEVEL}
+          />
+          <button
+            className="stat-button"
+            onClick={() => handleLevelChange(true)}
+            aria-label="Augmenter le niveau"
+            disabled={character.niveau >= MAX_LEVEL}
+          >
+            +
+          </button>
+        </div>
+      </div>
+
+      <div className="points-disponibles">
+        Points disponibles: {pointsDisponibles}
+      </div>
+
       {stats.map(({ id, label }) => (
         <div key={id} className="form-group stat-group">
           <label htmlFor={id}>{label}:</label>
@@ -50,22 +100,24 @@ export const CharacterStats = ({ character, onInputChange }: CharacterStatsProps
               className="stat-button"
               onClick={() => handleDecrement(id)}
               aria-label={`Diminuer ${label}`}
+              disabled={id === 'pouvoir' ? character[id] <= 0 : character[id] <= MIN_STAT}
             >
               -
             </button>
             <input
               type="number"
               id={id}
-              value={character[id as StatKey] || 0}
+              value={character[id] || 0}
               onChange={handleChange}
               onWheel={handleWheel}
               placeholder={label}
-              min="-4"
+              min={id === 'pouvoir' ? "0" : MIN_STAT.toString()}
             />
             <button
               className="stat-button"
               onClick={() => handleIncrement(id)}
               aria-label={`Augmenter ${label}`}
+              disabled={pointsDisponibles <= 0}
             >
               +
             </button>
