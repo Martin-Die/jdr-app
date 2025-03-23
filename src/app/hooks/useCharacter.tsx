@@ -44,8 +44,6 @@ const defaultCharacter: Character = {
 
 const POINTS_INITIAUX = 4;
 const POINTS_PAR_NIVEAU = 4;
-const MIN_STAT = -3;
-const MAX_STAT = 3;
 
 export const useCharacter = () => {
   const [character, setCharacter] = useState<Character>(defaultCharacter);
@@ -123,7 +121,7 @@ export const useCharacter = () => {
     const statKey = id as keyof Character;
     const ancienneValeur = character[statKey] as number;
     const pointsDisponibles = calculerPointsDisponibles();
-    
+
     // Calculer la différence en points
     let difference = 0;
     if (value > 0) {

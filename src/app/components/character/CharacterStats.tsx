@@ -9,7 +9,6 @@ interface CharacterStatsProps {
 type StatKey = 'force' | 'agilite' | 'perception' | 'constitution' | 'esprit' | 'charisme' | 'pouvoir';
 
 const MIN_STAT = -3;
-const MAX_STAT = 3;
 const MAX_LEVEL = 10;
 
 export const CharacterStats = ({ character, onInputChange, pointsDisponibles }: CharacterStatsProps) => {
