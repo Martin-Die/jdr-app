@@ -175,7 +175,7 @@ export const useCharacter = () => {
   const ajouterCompetence = useCallback(() => {
     setCharacter(prev => ({
       ...prev,
-      competences: [...prev.competences, { nom: '', niveau: '0', specialisation: '' }]
+      competences: [...prev.competences, { nom: '', niveau: 1, specialisation: '' }]
     }));
   }, []);
 
@@ -186,7 +186,7 @@ export const useCharacter = () => {
     }));
   }, []);
 
-  const handleCompetenceChange = useCallback((index: number, field: string, value: string) => {
+  const handleCompetenceChange = useCallback((index: number, field: string, value: string | number) => {
     setCharacter(prev => ({
       ...prev,
       competences: prev.competences.map((comp, i) => {

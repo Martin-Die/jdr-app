@@ -4,7 +4,7 @@ import { Tooltip } from '../ui/Tooltip';
 
 interface CharacterSkillsProps {
   character: Character;
-  onCompetenceChange: (index: number, field: string, value: string) => void;
+  onCompetenceChange: (index: number, field: string, value: string | number) => void;
   onAjouterCompetence: () => void;
   onSupprimerCompetence: (index: number) => void;
 }
@@ -17,6 +17,12 @@ export const CharacterSkills = ({
 }: CharacterSkillsProps) => {
   const handleCompetenceSelect = (index: number, competence: string) => {
     onCompetenceChange(index, 'nom', competence);
+  };
+
+  const handleNiveauChange = (index: number, increment: boolean) => {
+    const currentValue = character.competences[index].niveau || 0;
+    const newValue = increment ? currentValue + 1 : currentValue - 1;
+    onCompetenceChange(index, 'niveau', newValue);
   };
 
   return (
@@ -63,15 +69,31 @@ export const CharacterSkills = ({
                 <span className="info-icon">?</span>
               </Tooltip>
             </div>
-            <select
-              value={comp.niveau}
-              onChange={(e) => onCompetenceChange(index, 'niveau', e.target.value)}
-              className="competence-level"
-            >
-              {[...Array(9)].map((_, i) => (
-                <option key={i} value={i}>{i}</option>
-              ))}
-            </select>
+            <div className="stat-input-group">
+              <button
+                className="stat-button"
+                onClick={() => handleNiveauChange(index, false)}
+                aria-label="Diminuer le niveau"
+                disabled={comp.niveau <= 1}
+              >
+                -
+              </button>
+              <input
+                type="number"
+                value={comp.niveau}
+                onChange={(e) => onCompetenceChange(index, 'niveau', e.target.value === '' ? 1 : Number(e.target.value))}
+                className="competence-level"
+                min={1}
+              />
+              <button
+                className="stat-button"
+                onClick={() => handleNiveauChange(index, true)}
+                aria-label="Augmenter le niveau"
+                disabled={comp.niveau >= 5}
+              >
+                +
+              </button>
+            </div>
             {comp.specialisation !== undefined && (
               <input
                 type="text"

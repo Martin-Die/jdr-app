@@ -10,7 +10,7 @@ export interface Character {
   niveau: number;
   competences: Array<{
     nom: string;
-    niveau: string;
+    niveau: number;
     specialisation?: string;
   }>;
   force: number;
