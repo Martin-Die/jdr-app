@@ -11,6 +11,10 @@ export const CharacterIdentity = ({ character, onInputChange }: CharacterIdentit
     onInputChange(id, value);
   };
 
+  const handleWheel = (e: React.WheelEvent<HTMLInputElement>) => {
+    e.currentTarget.blur();
+  };
+
   return (
     <div className="identity-section">
       <h2>Identité</h2>
@@ -44,6 +48,7 @@ export const CharacterIdentity = ({ character, onInputChange }: CharacterIdentit
           id="niveau"
           value={character.niveau || ''}
           onChange={handleChange}
+          onWheel={handleWheel}
           placeholder="Niveau du personnage"
           min="1"
           max="20"
@@ -57,6 +62,7 @@ export const CharacterIdentity = ({ character, onInputChange }: CharacterIdentit
           id="taille"
           value={character.taille || ''}
           onChange={handleChange}
+          onWheel={handleWheel}
           placeholder="Taille en cm"
         />
       </div>
@@ -68,6 +74,7 @@ export const CharacterIdentity = ({ character, onInputChange }: CharacterIdentit
           id="poids"
           value={character.poids || ''}
           onChange={handleChange}
+          onWheel={handleWheel}
           placeholder="Poids en kg"
         />
       </div>

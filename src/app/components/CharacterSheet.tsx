@@ -42,7 +42,6 @@ export default function CharacterSheet() {
         />
 
         <div className="buttons">
-          <button onClick={calculerStats}>Calculer les stats</button>
           <button onClick={sauvegarder}>Sauvegarder</button>
           <button onClick={charger}>Charger</button>
         </div>

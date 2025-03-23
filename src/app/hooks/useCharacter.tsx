@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { Character, DerivedStats } from '../types/Character';
 
 const defaultCharacter: Character = {
@@ -43,15 +43,27 @@ export const useCharacter = () => {
     const esprit = typeof character.esprit === 'number' ? character.esprit : 0;
     const agilite = typeof character.agilite === 'number' ? character.agilite : 0;
 
+    // Fonction utilitaire pour arrondir au supérieur si ≥ 0.5
+    const arrondir = (nombre: number) => {
+      const partieEntiere = Math.floor(nombre);
+      const partieDecimale = nombre - partieEntiere;
+      return partieDecimale >= 0.5 ? partieEntiere + 1 : partieEntiere;
+    };
+
     setDerivedStats({
-      pv: (masse / 10) + ((constitution + 5) * niveau),
-      pp: pouvoir * 5,
-      lucidite: esprit * 2,
-      evitement: agilite * 2,
-      encaissement: constitution * 2,
-      vitesse: agilite + 6
+      pv: arrondir((masse / 10) + ((constitution + 5) * niveau)),
+      pp: arrondir(10 + (pouvoir * niveau)),
+      lucidite: arrondir(10 + esprit),
+      evitement: arrondir(8 + (agilite)),
+      encaissement: arrondir(8 + (constitution)),
+      vitesse: arrondir(10 + (agilite / 2))
     });
   }, [character]);
+
+  // Calculer automatiquement les stats dérivées quand les caractéristiques changent
+  useEffect(() => {
+    calculerStats();
+  }, [character, calculerStats]);
 
   const handleInputChange = useCallback((id: string, value: string | number) => {
     setCharacter(prev => ({
@@ -89,7 +101,7 @@ export const useCharacter = () => {
     }));
   }, []);
 
-  const sauvegarder = useCallback(() => {
+  const sauvegarder = useCallback(async () => {
     try {
       const data = {
         character,
@@ -97,14 +109,44 @@ export const useCharacter = () => {
       };
       const jsonString = JSON.stringify(data, null, 2);
       const blob = new Blob([jsonString], { type: 'application/json' });
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = `${character.nom || 'personnage'}.json`;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      URL.revokeObjectURL(url);
+
+      // Vérifier si l'API showSaveFilePicker est supportée
+      if ('showSaveFilePicker' in window) {
+        const options = {
+          types: [{
+            description: 'Fichier JSON',
+            accept: {
+              'application/json': ['.json']
+            }
+          }],
+          suggestedName: `${character.nom || 'personnage'}.json`
+        };
+
+        try {
+          const fileHandle = await (window as any).showSaveFilePicker(options);
+          const writable = await fileHandle.createWritable();
+          await writable.write(blob);
+          await writable.close();
+          alert('Personnage sauvegardé avec succès !');
+        } catch (err: any) {
+          // Ne pas afficher l'erreur si c'est une annulation par l'utilisateur
+          if (err.name !== 'AbortError') {
+            console.error('Erreur lors de la sauvegarde:', err);
+            alert('Erreur lors de la sauvegarde du personnage');
+          }
+        }
+      } else {
+        // Fallback pour les navigateurs qui ne supportent pas showSaveFilePicker
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `${character.nom || 'personnage'}.json`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+        alert('Personnage sauvegardé avec succès !');
+      }
     } catch (error) {
       console.error('Erreur lors de la sauvegarde:', error);
       alert('Erreur lors de la sauvegarde du personnage');

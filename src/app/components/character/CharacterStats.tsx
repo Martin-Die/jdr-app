@@ -14,6 +14,10 @@ export const CharacterStats = ({ character, onInputChange }: CharacterStatsProps
     onInputChange(id, value === '' ? '' : Number(value));
   };
 
+  const handleWheel = (e: React.WheelEvent<HTMLInputElement>) => {
+    e.currentTarget.blur();
+  };
+
   const stats = [
     { id: 'force', label: 'Force' },
     { id: 'agilite', label: 'Agilité' },
@@ -36,6 +40,7 @@ export const CharacterStats = ({ character, onInputChange }: CharacterStatsProps
             id={id}
             value={character[id as StatKey] || ''}
             onChange={handleChange}
+            onWheel={handleWheel}
             placeholder={label}
             min="0"
             max="20"
