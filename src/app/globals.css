@@ -320,3 +320,170 @@ button:hover {
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
+.massModifiers {
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+}
+
+.massModifiers h3 {
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.modifiersGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.modifiersGrid p {
+  margin: 0;
+  padding: 0.5rem;
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.modifiersGrid .value {
+  font-weight: bold;
+  color: #2c5282;
+}
+
+.tooltip-container {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip-content {
+  visibility: hidden;
+  position: absolute;
+  z-index: 1000;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.2s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  min-width: 200px;
+}
+
+.tooltip-container:hover .tooltip-content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.tooltip-content::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #333 transparent transparent transparent;
+}
+
+.info-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background-color: #4a90e2;
+  color: white;
+  border-radius: 50%;
+  font-size: 14px;
+  margin-left: 8px;
+  cursor: help;
+}
+
+.mass-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 8px;
+}
+
+.mass-table th,
+.mass-table td {
+  padding: 4px 8px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mass-table th {
+  background-color: rgba(255, 255, 255, 0.1);
+  font-weight: bold;
+}
+
+.competence-input-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+}
+
+.competences-tooltip {
+  max-width: 400px;
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 8px;
+}
+
+.competences-tooltip h4 {
+  margin-bottom: 12px;
+  color: white;
+  font-size: 16px;
+}
+
+.competences-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 8px;
+}
+
+.competence-option {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.competence-option:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.competence-option strong {
+  display: block;
+  color: #4a90e2;
+  margin-bottom: 4px;
+}
+
+.competence-option p {
+  font-size: 12px;
+  margin-bottom: 8px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.specialisations {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.specialisation-tag {
+  background-color: rgba(74, 144, 226, 0.2);
+  color: #4a90e2;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 11px;
+}

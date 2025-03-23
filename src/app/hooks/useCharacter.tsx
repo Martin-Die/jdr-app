@@ -71,12 +71,28 @@ export const useCharacter = () => {
       return partieDecimale >= 0.5 ? partieEntiere + 1 : partieEntiere;
     };
 
+    // Calculer le bonus d'esquive
+    const bonusEsquive = character.competences.reduce((bonus, comp) => {
+      if (comp.nom === "Esquive") {
+        return bonus + Number(comp.niveau);
+      }
+      return bonus;
+    }, 0);
+
+    // Calculer le bonus de parade
+    const bonusParade = character.competences.reduce((bonus, comp) => {
+      if (comp.nom === "Parade") {
+        return bonus + Number(comp.niveau);
+      }
+      return bonus;
+    }, 0);
+
     setDerivedStats({
       pv: arrondir((masse / 10) + ((constitution + 5) * niveau)),
       pp: arrondir(10 + (pouvoir * niveau)),
       lucidite: arrondir(10 + esprit),
-      evitement: arrondir(8 + (agilite)),
-      encaissement: arrondir(8 + (constitution)),
+      evitement: arrondir(8 + (agilite + bonusEsquive)),
+      encaissement: arrondir(8 + (constitution + bonusParade)),
       vitesse: arrondir(10 + (agilite / 2))
     });
   }, [character]);
