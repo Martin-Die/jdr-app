@@ -11,11 +11,21 @@ export const CharacterStats = ({ character, onInputChange }: CharacterStatsProps
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
     // Si la valeur est vide, on envoie une chaîne vide, sinon on convertit en nombre
-    onInputChange(id, value === '' ? '' : Number(value));
+    onInputChange(id, value === '' ? 0 : Number(value));
   };
 
   const handleWheel = (e: React.WheelEvent<HTMLInputElement>) => {
     e.currentTarget.blur();
+  };
+
+  const handleIncrement = (id: StatKey) => {
+    const currentValue = character[id] || 0;
+    onInputChange(id, currentValue + 1);
+  };
+
+  const handleDecrement = (id: StatKey) => {
+    const currentValue = character[id] || 0;
+    onInputChange(id, currentValue - 1);
   };
 
   const stats = [
@@ -33,18 +43,33 @@ export const CharacterStats = ({ character, onInputChange }: CharacterStatsProps
       <h2>Caractéristiques</h2>
 
       {stats.map(({ id, label }) => (
-        <div key={id} className="form-group">
+        <div key={id} className="form-group stat-group">
           <label htmlFor={id}>{label}:</label>
-          <input
-            type="number"
-            id={id}
-            value={character[id as StatKey] || ''}
-            onChange={handleChange}
-            onWheel={handleWheel}
-            placeholder={label}
-            min="0"
-            max="20"
-          />
+          <div className="stat-input-group">
+            <button
+              className="stat-button"
+              onClick={() => handleDecrement(id)}
+              aria-label={`Diminuer ${label}`}
+            >
+              -
+            </button>
+            <input
+              type="number"
+              id={id}
+              value={character[id as StatKey] || 0}
+              onChange={handleChange}
+              onWheel={handleWheel}
+              placeholder={label}
+              min="-4"
+            />
+            <button
+              className="stat-button"
+              onClick={() => handleIncrement(id)}
+              aria-label={`Augmenter ${label}`}
+            >
+              +
+            </button>
+          </div>
         </div>
       ))}
     </div>

@@ -8,12 +8,12 @@ export const competencesList: Competence[] = [
   {
     nom: "Esquive",
     description: "Capacité à éviter les attaques",
-    specialisations: ["Esquive roulée", "Esquive latérale", "Esquive arrière", "Contre-attaque"]
+    specialisations: ["Esquive roulée", "Esquive latérale", "Esquive arrière"]
   },
   {
     nom: "Parade",
     description: "Maîtrise de la défense",
-    specialisations: ["Parade haute", "Parade basse", "Parade latérale", "Riposte"]
+    specialisations: ["Parade haute", "Parade basse", "Parade latérale"]
   },
   {
     nom: "Combat",

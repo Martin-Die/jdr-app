@@ -487,3 +487,42 @@ button:hover {
   border-radius: 3px;
   font-size: 11px;
 }
+
+/* Styles pour les statistiques */
+.stat-group {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.stat-input-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.stat-button {
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.stat-button:hover {
+  background-color: #2980b9;
+}
+
+.stat-input-group input {
+  width: 4rem;
+  text-align: center;
+}

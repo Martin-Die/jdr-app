@@ -39,8 +39,8 @@ export const CharacterSkills = ({
                   <h4>Compétences disponibles</h4>
                   <div className="competences-grid">
                     {competencesList.map((c) => (
-                      <div 
-                        key={c.nom} 
+                      <div
+                        key={c.nom}
                         className="competence-option"
                         onClick={() => handleCompetenceSelect(index, c.nom)}
                       >
@@ -68,7 +68,7 @@ export const CharacterSkills = ({
               onChange={(e) => onCompetenceChange(index, 'niveau', e.target.value)}
               className="competence-level"
             >
-              {[...Array(6)].map((_, i) => (
+              {[...Array(9)].map((_, i) => (
                 <option key={i} value={i}>{i}</option>
               ))}
             </select>

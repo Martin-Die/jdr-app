@@ -164,7 +164,6 @@ export const useCharacter = () => {
           const writable = await fileHandle.createWritable();
           await writable.write(blob);
           await writable.close();
-          alert('Personnage sauvegardé avec succès !');
         } catch (err: unknown) {
           // Ne pas afficher l'erreur si c'est une annulation par l'utilisateur
           if (err instanceof Error && err.name !== 'AbortError') {
@@ -182,7 +181,6 @@ export const useCharacter = () => {
         link.click();
         document.body.removeChild(link);
         URL.revokeObjectURL(url);
-        alert('Personnage sauvegardé avec succès !');
       }
     } catch (error) {
       console.error('Erreur lors de la sauvegarde:', error);
@@ -235,7 +233,6 @@ export const useCharacter = () => {
 
               setCharacter(processedCharacter);
               setDerivedStats(processedStats);
-              alert('Personnage chargé avec succès !');
             } else {
               throw new Error('Format de fichier invalide');
             }

@@ -124,7 +124,7 @@ export default function CharacterSheet() {
               </h3>
               <div className="modifiersGrid">
                 {(() => {
-                  const modifiers = getMassModifier(character.poids);
+                  const modifiers = getMassModifier(character.poids, character.taille);
                   return (
                     <>
                       <p><strong>Esquive :</strong> <span className="value">{modifiers.esquive >= 0 ? '+' : ''}{modifiers.esquive}</span></p>
