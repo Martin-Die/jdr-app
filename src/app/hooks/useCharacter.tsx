@@ -1,5 +1,6 @@
 import { useState, useCallback, useEffect } from 'react';
 import { Character, DerivedStats } from '../types/Character';
+import { getMassModifier } from '../utils/massModifiers';
 
 interface FileSystemHandle {
   createWritable(): Promise<FileSystemWritableFileStream>;
@@ -29,7 +30,7 @@ const defaultCharacter: Character = {
   poids: 0,
   masse: 0,
   race: '',
-  sexe: 'Masculin',
+  sexe: '',
   age: '',
   statut: '',
   niveau: 1,
@@ -91,11 +92,14 @@ export const useCharacter = () => {
       return bonus;
     }, 0);
 
+    // Obtenir le modificateur de masse
+    const massModifier = getMassModifier(character.poids, character.taille);
+
     setDerivedStats({
       pv: arrondir((masse / 10) + ((constitution + 5) * niveau)),
       pp: arrondir(10 + (pouvoir * niveau)),
       lucidite: arrondir(10 + esprit),
-      evitement: arrondir(8 + (agilite + bonusEsquive)),
+      evitement: arrondir(8 + (agilite + bonusEsquive + massModifier.evitement)),
       encaissement: arrondir(8 + (constitution + bonusParade)),
       vitesse: arrondir(10 + (agilite / 2)),
     });

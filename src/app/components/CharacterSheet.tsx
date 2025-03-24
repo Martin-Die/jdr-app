@@ -99,12 +99,12 @@ export default function CharacterSheet() {
                       </tr>
                     </thead>
                     <tbody>
-                      <tr><td>&lt; 50</td><td>+10</td><td>+5</td><td>-10</td></tr>
-                      <tr><td>51 - 100</td><td>+8</td><td>+4</td><td>-8</td></tr>
-                      <tr><td>101 - 150</td><td>+6</td><td>+3</td><td>-6</td></tr>
-                      <tr><td>151 - 200</td><td>+4</td><td>+2</td><td>-4</td></tr>
-                      <tr><td>201 - 240</td><td>+2</td><td>+1</td><td>-2</td></tr>
-                      <tr><td>241 - 260</td><td>0</td><td>0</td><td>0</td></tr>
+                      <tr><td>&lt; 49</td><td>+10</td><td>+5</td><td>-10</td></tr>
+                      <tr><td>50 - 99</td><td>+8</td><td>+4</td><td>-8</td></tr>
+                      <tr><td>100 - 149</td><td>+6</td><td>+3</td><td>-6</td></tr>
+                      <tr><td>150 - 199</td><td>+4</td><td>+2</td><td>-4</td></tr>
+                      <tr><td>200 - 239</td><td>+2</td><td>+1</td><td>-2</td></tr>
+                      <tr><td>240 - 260</td><td>0</td><td>0</td><td>0</td></tr>
                       <tr><td>261 - 300</td><td>-2</td><td>-1</td><td>+2</td></tr>
                       <tr><td>301 - 400</td><td>-4</td><td>-2</td><td>+4</td></tr>
                       <tr><td>401 - 600</td><td>-6</td><td>-3</td><td>+6</td></tr>
@@ -129,7 +129,7 @@ export default function CharacterSheet() {
                 })()}
               </div>
             </div>
-          )};
+          )}
 
           <h2>Stats Dérivées</h2>
           <div className="statsDerivees">
@@ -153,7 +153,7 @@ export default function CharacterSheet() {
                   {comp.specialisation && ` (${comp.specialisation})`}
                 </span>
               </p>
-            ))};
+            ))}
           </div>
         </div>
       </div>

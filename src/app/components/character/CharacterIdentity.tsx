@@ -78,15 +78,13 @@ export const CharacterIdentity = ({ character, onInputChange }: CharacterIdentit
 
       <div className="form-group">
         <label htmlFor="sexe">Sexe:</label>
-        <select
+        <input
+          type="text"
           id="sexe"
           value={character.sexe}
           onChange={handleChange}
-        >
-          <option value="Masculin">Masculin</option>
-          <option value="Féminin">Féminin</option>
-          <option value="Autre">Autre</option>
-        </select>
+          placeholder='sexe'
+        />
       </div>
 
       <div className="form-group">

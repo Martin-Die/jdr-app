@@ -13,13 +13,13 @@ export function getMassModifier(poids: number, taille: number): MassModifier {
     { min: 100, max: 150, stats: { esquive: 6, evitement: 3, degatCAC: -6 } },
     { min: 150, max: 200, stats: { esquive: 4, evitement: 2, degatCAC: -4 } },
     { min: 200, max: 240, stats: { esquive: 2, evitement: 1, degatCAC: -2 } },
-    { min: 240, max: 260, stats: { esquive: 0, evitement: 0, degatCAC: 0 } },
-    { min: 260, max: 300, stats: { esquive: -2, evitement: -1, degatCAC: 2 } },
+    { min: 240, max: 261, stats: { esquive: 0, evitement: 0, degatCAC: 0 } },
+    { min: 261, max: 301, stats: { esquive: -2, evitement: -1, degatCAC: 2 } },
   ];
 
   // Vérifier d'abord les seuils de base
   for (const seuil of seuilsBase) {
-    if (masse > seuil.min && masse <= seuil.max) {
+    if (masse >= seuil.min && masse < seuil.max) {
       return seuil.stats;
     };
   };
