@@ -27,17 +27,15 @@ export function getMassModifier(poids: number, taille: number): MassModifier {
   // Si la masse est supérieure à 300, calculer le modificateur progressif
   if (masse >= 300) {
     let palier = 1;
-    let rangeMin = 300;
-    let rangeMax = 400;
+    let range = 400;
 
-    while (masse > rangeMax) {
+    while (masse > range) {
       palier++;
-      rangeMin = rangeMax;
-      rangeMax += (100 * palier);
-      console.log(rangeMax)
+      range += (100 * palier);
+      console.log(range)
     }
 
-    if (masse <= rangeMax) {
+    if (masse <= range) {
       return {
         esquive: -2 * (palier),
         evitement: -1 * (palier),
