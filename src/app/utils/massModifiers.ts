@@ -25,14 +25,14 @@ export function getMassModifier(poids: number, taille: number): MassModifier {
   }
 
   // Si la masse est supérieure à 300, calculer le modificateur progressif
-  if (masse >= 300) {
+  if (masse > 300) {
     // Calcul direct du palier sans boucle
     const palier = Math.ceil((-1 + Math.sqrt(1 + 8 * (masse - 300) / 100)) / 2);
 
     return {
-      esquive: -2 * palier,
-      evitement: -1 * palier,
-      degatCAC: 2 * palier
+      esquive: (-2 * palier) - 2,
+      evitement: (-1 * palier) - 1,
+      degatCAC: (2 * palier) + 2
     };
   }
 
