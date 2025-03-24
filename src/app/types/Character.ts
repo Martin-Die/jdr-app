@@ -3,6 +3,7 @@ export interface Character {
   nom: string;
   taille: number;
   poids: number;
+  masse: number;
   race: string;
   sexe: string;
   age: string;

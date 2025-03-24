@@ -27,6 +27,7 @@ const defaultCharacter: Character = {
   nom: '',
   taille: 0,
   poids: 0,
+  masse: 0,
   race: '',
   sexe: 'Masculin',
   age: '',
@@ -167,7 +168,10 @@ export const useCharacter = () => {
         [id]: value === '' ? '' :
           ['taille', 'poids', 'niveau'].includes(id)
             ? Number(value)
-            : value
+            : value,
+        masse: id === 'taille' ? Number(value) + prev.poids :
+          id === 'poids' ? prev.taille + Number(value) :
+            prev.masse
       }));
     }
   }, [handleStatChange]);

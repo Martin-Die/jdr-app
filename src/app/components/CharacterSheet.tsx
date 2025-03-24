@@ -115,6 +115,7 @@ export default function CharacterSheet() {
                   <span className="info-icon">?</span>
                 </Tooltip>
               </h3>
+              <p><strong>Masse :</strong> <span className="value">{character.masse}</span></p>
               <div className="modifiersGrid">
                 {(() => {
                   const modifiers = getMassModifier(character.poids, character.taille);
