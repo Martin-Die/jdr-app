@@ -5,6 +5,7 @@ export interface Competence {
 }
 
 export const competencesList: Competence[] = [
+  // Compétences de combat
   {
     nom: "Esquive",
     description: "Capacité à éviter les attaques",
@@ -16,53 +17,126 @@ export const competencesList: Competence[] = [
     specialisations: ["Parade haute", "Parade basse", "Parade latérale"]
   },
   {
-    nom: "Combat",
-    description: "Maîtrise des techniques de combat",
-    specialisations: ["Arme à une main", "Arme à deux mains", "Arme à distance", "Combat à mains nues"]
+    nom: "Acrobatie",
+    description: "Agilité et contrôle du corps",
+    specialisations: ["Saut", "Roulade", "Équilibre"]
+  },
+  {
+    nom: "Corps-à-Corps",
+    description: "Combat rapproché",
+    specialisations: ["Boxe", "Grappling", "Arts martiaux"]
+  },
+  {
+    nom: "Tir",
+    description: "Maîtrise des armes à distance",
+    specialisations: ["Tir précis", "Tir rapide", "Tir mobile"]
+  },
+  {
+    nom: "Pilotage",
+    description: "Contrôle des véhicules",
+    specialisations: ["Voiture", "Moto", "Avion"]
+  },
+
+  // Compétences de furtivité
+  {
+    nom: "Furtivité",
+    description: "Déplacement silencieux",
+    specialisations: ["Camouflage", "Déplacement silencieux", "Dissimulation"]
+  },
+  {
+    nom: "Pistage",
+    description: "Suivi et identification de traces",
+    specialisations: ["Traces", "Odeurs", "Signes"]
   },
   {
     nom: "Survie",
-    description: "Capacité à survivre dans la nature",
-    specialisations: ["Navigation", "Pistage", "Chasse", "Pêche"]
+    description: "Adaptation en milieu hostile",
+    specialisations: ["Navigation", "Orientation", "Ressources"]
   },
   {
-    nom: "Discrétion",
-    description: "Art de passer inaperçu",
-    specialisations: ["Infiltration", "Camouflage", "Pickpocket", "Crochetage"]
+    nom: "Dissimulation",
+    description: "Art de se cacher",
+    specialisations: ["Camouflage", "Infiltration", "Mimétisme"]
   },
   {
-    nom: "Athlétisme",
-    description: "Capacités physiques générales",
-    specialisations: ["Course", "Escalade", "Saut", "Natation"]
+    nom: "Vole",
+    description: "Vol et subtilisation",
+    specialisations: ["Pickpocket", "Crochetage", "Infiltration"]
   },
   {
-    nom: "Connaissance",
-    description: "Savoir théorique",
-    specialisations: ["Histoire", "Nature", "Religion", "Arcane", "Médicine"]
+    nom: "Piégeage",
+    description: "Installation et détection de pièges",
+    specialisations: ["Installation", "Détection", "Désamorçage"]
+  },
+
+  // Compétences sociales
+  {
+    nom: "Intimidation",
+    description: "Influence par la force",
+    specialisations: ["Physique", "Psychologique", "Verbale"]
   },
   {
-    nom: "Artisanat",
-    description: "Création d'objets",
-    specialisations: ["Forge", "Alchimie", "Enchantement", "Menuiserie"]
+    nom: "Négociation",
+    description: "Art de la persuasion",
+    specialisations: ["Diplomatie", "Marchandage", "Persuasion"]
   },
   {
-    nom: "Diplomatie",
-    description: "Art de la négociation",
-    specialisations: ["Persuasion", "Intimidation", "Bluff", "Étiquette"]
+    nom: "Psychologie",
+    description: "Compréhension du comportement humain",
+    specialisations: ["Analyse", "Manipulation", "Thérapie"]
+  },
+
+  // Compétences de connaissances
+  {
+    nom: "Histoire",
+    description: "Connaissance du passé",
+    specialisations: ["Histoire locale", "Histoire militaire", "Histoire culturelle"]
   },
   {
-    nom: "Perception",
-    description: "Vigilance et observation",
-    specialisations: ["Vue", "Ouïe", "Odorat", "Toucher"]
+    nom: "Ingénierie",
+    description: "Conception et construction",
+    specialisations: ["Construction", "Réparation", "Innovation"]
   },
   {
-    nom: "Acrobatie",
-    description: "Agilité et équilibre",
-    specialisations: ["Équilibre", "Souplesse", "Contorsion", "Parkour"]
+    nom: "Arcane",
+    description: "Connaissance des forces mystiques",
+    specialisations: ["Rituels", "Sorts", "Artéfacts"]
   },
   {
     nom: "Médecine",
-    description: "Soins et guérison",
-    specialisations: ["Premiers soins", "Chirurgie", "Herboristerie", "Toxicologie"]
+    description: "Soins et diagnostic",
+    specialisations: ["Premiers soins", "Diagnostic", "Chirurgie"]
+  },
+  {
+    nom: "Biologie",
+    description: "Étude du vivant",
+    specialisations: ["Anatomie", "Physiologie", "Écologie"]
+  },
+  {
+    nom: "Informatique",
+    description: "Maîtrise des systèmes informatiques",
+    specialisations: ["Programmation", "Sécurité", "Réseaux"]
+  },
+
+  // Compétences techniques
+  {
+    nom: "Armurerie",
+    description: "Maintenance et modification d'armes",
+    specialisations: ["Réparation", "Modification", "Identification"]
+  },
+  {
+    nom: "Mécanique",
+    description: "Maintenance des machines",
+    specialisations: ["Réparation", "Bricolage", "Optimisation"]
+  },
+  {
+    nom: "Cuisine",
+    description: "Art culinaire",
+    specialisations: ["Cuisine", "Pâtisserie", "Conservation"]
+  },
+  {
+    nom: "Fouille",
+    description: "Recherche et analyse",
+    specialisations: ["Recherche", "Analyse", "Documentation"]
   }
-]; 
+];

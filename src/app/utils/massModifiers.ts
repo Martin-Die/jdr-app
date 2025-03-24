@@ -27,12 +27,8 @@ export function getMassModifier(poids: number, taille: number): MassModifier {
   // Si la masse est supérieure à 300, calculer le modificateur progressif
   if (masse >= 300) {
     // Calcul direct du palier sans boucle
-    // La formule est basée sur la somme des séries arithmétiques
-    // Pour chaque palier n, la masse maximale est: 300 + 100 + 200 + 300 + ... + (n-1)*100
-    // Ce qui donne: 300 + 100 * (n-1) * n / 2
-    // En résolvant pour n, on obtient:
     const palier = Math.ceil((-1 + Math.sqrt(1 + 8 * (masse - 300) / 100)) / 2);
-    
+
     return {
       esquive: -2 * palier,
       evitement: -1 * palier,
