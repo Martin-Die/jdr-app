@@ -84,16 +84,6 @@ export default function CharacterSheet() {
         </div>
 
         <div className="section">
-          <h2>Stats Dérivées</h2>
-          <div className="statsDerivees">
-            <p><strong>PV :</strong> <span className="value">{derivedStats.pv}</span></p>
-            <p><strong>PP :</strong> <span className="value">{derivedStats.pp}</span></p>
-            <p><strong>Lucidité :</strong> <span className="value">{derivedStats.lucidite}</span></p>
-            <p><strong>Évitement :</strong> <span className="value">{derivedStats.evitement}</span></p>
-            <p><strong>Encaissement :</strong> <span className="value">{derivedStats.encaissement}</span></p>
-            <p><strong>Vitesse :</strong> <span className="value">{derivedStats.vitesse}</span></p>
-          </div>
-
           {character.poids > 0 && (
             <div className="massModifiers">
               <h3>
@@ -138,6 +128,16 @@ export default function CharacterSheet() {
               </div>
             </div>
           )}
+
+          <h2>Stats Dérivées</h2>
+          <div className="statsDerivees">
+            <p><strong>PV :</strong> <span className="value">{derivedStats.pv}</span></p>
+            <p><strong>PP :</strong> <span className="value">{derivedStats.pp}</span></p>
+            <p><strong>Lucidité :</strong> <span className="value">{derivedStats.lucidite}</span></p>
+            <p><strong>Évitement :</strong> <span className="value">{derivedStats.evitement}</span></p>
+            <p><strong>Encaissement :</strong> <span className="value">{derivedStats.encaissement}</span></p>
+            <p><strong>Vitesse :</strong> <span className="value">{derivedStats.vitesse}</span></p>
+          </div>
         </div>
 
         <div className="section">
