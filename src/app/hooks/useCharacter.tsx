@@ -3,12 +3,12 @@ import { Character, DerivedStats } from '../types/Character';
 
 interface FileSystemHandle {
   createWritable(): Promise<FileSystemWritableFileStream>;
-}
+};
 
 interface FileSystemWritableFileStream {
   write(data: Blob): Promise<void>;
   close(): Promise<void>;
-}
+};
 
 interface ShowFilePickerOptions {
   types: Array<{
@@ -16,11 +16,11 @@ interface ShowFilePickerOptions {
     accept: Record<string, string[]>;
   }>;
   suggestedName: string;
-}
+};
 
 interface WindowWithFileSystem extends Window {
   showSaveFilePicker(options: ShowFilePickerOptions): Promise<FileSystemHandle>;
-}
+};
 
 const defaultCharacter: Character = {
   nomJoueur: '',
@@ -79,7 +79,7 @@ export const useCharacter = () => {
     const bonusEsquive = character.competences.reduce((bonus, comp) => {
       if (comp.nom === "Esquive") {
         return bonus + Number(comp.niveau);
-      }
+      };
       return bonus;
     }, 0);
 
@@ -87,7 +87,7 @@ export const useCharacter = () => {
     const bonusParade = character.competences.reduce((bonus, comp) => {
       if (comp.nom === "Parade") {
         return bonus + Number(comp.niveau);
-      }
+      };
       return bonus;
     }, 0);
 
@@ -97,7 +97,7 @@ export const useCharacter = () => {
       lucidite: arrondir(10 + esprit),
       evitement: arrondir(8 + (agilite + bonusEsquive)),
       encaissement: arrondir(8 + (constitution + bonusParade)),
-      vitesse: arrondir(10 + (agilite / 2))
+      vitesse: arrondir(10 + (agilite / 2)),
     });
   }, [character]);
 
@@ -134,19 +134,19 @@ export const useCharacter = () => {
     } else {
       // Si on passe à 0, on récupère les points de l'ancienne valeur
       difference = ancienneValeur > 0 ? -ancienneValeur : Math.abs(ancienneValeur);
-    }
+    };
 
     // Vérifier si le changement est valide uniquement pour les valeurs positives
     if (value > ancienneValeur && difference > pointsDisponibles) {
       alert('Points de caractéristiques insuffisants');
       return;
-    }
+    };
 
     // Vérifier uniquement la limite minimale du pouvoir
     if (statKey === 'pouvoir' && value < 0) {
       alert('Le pouvoir ne peut pas être négatif');
       return;
-    }
+    };
 
     setCharacter(prev => ({
       ...prev,
@@ -173,7 +173,7 @@ export const useCharacter = () => {
           id === 'poids' ? prev.taille + Number(value) :
             prev.masse
       }));
-    }
+    };
   }, [handleStatChange]);
 
   const ajouterCompetence = useCallback(() => {
@@ -196,7 +196,7 @@ export const useCharacter = () => {
       competences: prev.competences.map((comp, i) => {
         if (i === index) {
           return { ...comp, [field]: value };
-        }
+        };
         return comp;
       })
     }));
@@ -233,8 +233,8 @@ export const useCharacter = () => {
           if (err instanceof Error && err.name !== 'AbortError') {
             console.error('Erreur lors de la sauvegarde:', err);
             alert('Erreur lors de la sauvegarde du personnage');
-          }
-        }
+          };
+        };
       } else {
         // Fallback pour les navigateurs qui ne supportent pas showSaveFilePicker
         const url = URL.createObjectURL(blob);
@@ -245,11 +245,11 @@ export const useCharacter = () => {
         link.click();
         document.body.removeChild(link);
         URL.revokeObjectURL(url);
-      }
+      };
     } catch (error) {
       console.error('Erreur lors de la sauvegarde:', error);
       alert('Erreur lors de la sauvegarde du personnage');
-    }
+    };
   }, [character, derivedStats]);
 
   const charger = useCallback(() => {
@@ -282,8 +282,8 @@ export const useCharacter = () => {
                 competences: data.character.competences?.map((comp: { nom: string; niveau: string; specialisation?: string }) => ({
                   nom: comp.nom || '',
                   niveau: comp.niveau || '0',
-                  specialisation: comp.specialisation || ''
-                })) || []
+                  specialisation: comp.specialisation || '',
+                })) || [],
               };
 
               const processedStats: DerivedStats = {
@@ -292,21 +292,21 @@ export const useCharacter = () => {
                 lucidite: data.derivedStats.lucidite ?? 0,
                 evitement: data.derivedStats.evitement ?? 0,
                 encaissement: data.derivedStats.encaissement ?? 0,
-                vitesse: data.derivedStats.vitesse ?? 0
+                vitesse: data.derivedStats.vitesse ?? 0,
               };
 
               setCharacter(processedCharacter);
               setDerivedStats(processedStats);
             } else {
               throw new Error('Format de fichier invalide');
-            }
+            };
           } catch (error) {
             console.error('Erreur lors du chargement:', error);
             alert('Erreur lors du chargement du fichier');
-          }
+          };
         };
         reader.readAsText(file);
-      }
+      };
     };
     input.click();
   }, []);
@@ -321,6 +321,6 @@ export const useCharacter = () => {
     handleCompetenceChange,
     sauvegarder,
     charger,
-    calculerPointsDisponibles
+    calculerPointsDisponibles,
   };
 }; 

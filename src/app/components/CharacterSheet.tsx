@@ -17,7 +17,7 @@ export default function CharacterSheet() {
     handleCompetenceChange,
     sauvegarder,
     charger,
-    calculerPointsDisponibles
+    calculerPointsDisponibles,
   } = useCharacter();
 
   return (
@@ -129,7 +129,7 @@ export default function CharacterSheet() {
                 })()}
               </div>
             </div>
-          )}
+          )};
 
           <h2>Stats Dérivées</h2>
           <div className="statsDerivees">
@@ -153,10 +153,10 @@ export default function CharacterSheet() {
                   {comp.specialisation && ` (${comp.specialisation})`}
                 </span>
               </p>
-            ))}
+            ))};
           </div>
         </div>
       </div>
     </div>
   );
-} 
+};

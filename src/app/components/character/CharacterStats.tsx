@@ -4,7 +4,7 @@ interface CharacterStatsProps {
   character: Character;
   onInputChange: (id: string, value: number) => void;
   pointsDisponibles: number;
-}
+};
 
 type StatKey = 'force' | 'agilite' | 'perception' | 'constitution' | 'esprit' | 'charisme' | 'pouvoir';
 
@@ -38,7 +38,7 @@ export const CharacterStats = ({ character, onInputChange, pointsDisponibles }: 
 
     if (newLevel >= 1 && newLevel <= MAX_LEVEL) {
       onInputChange('niveau', newLevel);
-    }
+    };
   };
 
   const stats = [
@@ -48,7 +48,7 @@ export const CharacterStats = ({ character, onInputChange, pointsDisponibles }: 
     { id: 'constitution', label: 'Constitution' },
     { id: 'esprit', label: 'Esprit' },
     { id: 'charisme', label: 'Charisme' },
-    { id: 'pouvoir', label: 'Pouvoir' }
+    { id: 'pouvoir', label: 'Pouvoir' },
   ] as const;
 
   return (

@@ -7,7 +7,7 @@ interface CharacterSkillsProps {
   onCompetenceChange: (index: number, field: string, value: string | number) => void;
   onAjouterCompetence: () => void;
   onSupprimerCompetence: (index: number) => void;
-}
+};
 
 export const CharacterSkills = ({
   character,

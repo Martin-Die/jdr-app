@@ -3,7 +3,7 @@ import { Character } from '../../types/Character';
 interface CharacterIdentityProps {
   character: Character;
   onInputChange: (id: string, value: string | number) => void;
-}
+};
 
 export const CharacterIdentity = ({ character, onInputChange }: CharacterIdentityProps) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {

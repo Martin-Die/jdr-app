@@ -21,7 +21,7 @@ export interface Character {
   esprit: number;
   charisme: number;
   pouvoir: number;
-}
+};
 
 export interface DerivedStats {
   pv: number;
@@ -30,4 +30,4 @@ export interface DerivedStats {
   evitement: number;
   encaissement: number;
   vitesse: number;
-} 
+};

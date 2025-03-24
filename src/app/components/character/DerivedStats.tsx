@@ -3,7 +3,7 @@ import { DerivedStats as DerivedStatsType } from '../../types/Character';
 interface DerivedStatsProps {
   stats: DerivedStatsType;
   onCalculer: () => void;
-}
+};
 
 export const DerivedStats = ({ stats, onCalculer }: DerivedStatsProps) => {
   const statsLabels = {
@@ -12,20 +12,20 @@ export const DerivedStats = ({ stats, onCalculer }: DerivedStatsProps) => {
     lucidite: 'Lucidité',
     evitement: 'Évitement',
     encaissement: 'Encaissement',
-    vitesse: 'Vitesse'
+    vitesse: 'Vitesse',
   };
 
   return (
     <div className="derived-stats-section">
       <h2>Statistiques Dérivées</h2>
-      
+
       <div className="stats-grid">
         {(Object.entries(stats) as [keyof DerivedStatsType, number][]).map(([key, value]) => (
           <div key={key} className="stat-item">
             <label>{statsLabels[key]}:</label>
             <span className="stat-value">{value}</span>
           </div>
-        ))}
+        ))};
       </div>
 
       <button
