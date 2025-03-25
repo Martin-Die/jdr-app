@@ -88,8 +88,8 @@ export const CharacterStats = ({ character, onInputChange, pointsDisponibles }: 
             +
           </button>
           {currentLevelInfo && (
-            <span className="ml-2 text-sm font-medium text-gray-700">
-              ({currentLevelInfo.rang})
+            <span>
+              <strong>({currentLevelInfo.rang})</strong>
             </span>
           )}
         </div>
