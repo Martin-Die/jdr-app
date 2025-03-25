@@ -1,4 +1,5 @@
 import { Character } from '../../types/Character';
+import { getSkillLevelInfo } from '../../types/SkillLevel';
 
 interface CharacterStatsProps {
   character: Character;
@@ -40,6 +41,8 @@ export const CharacterStats = ({ character, onInputChange, pointsDisponibles }: 
       onInputChange('niveau', newLevel);
     };
   };
+
+  const currentLevelInfo = getSkillLevelInfo(character.niveau || 1);
 
   const stats = [
     { id: 'force', label: 'Force' },
@@ -84,6 +87,11 @@ export const CharacterStats = ({ character, onInputChange, pointsDisponibles }: 
           >
             +
           </button>
+          {currentLevelInfo && (
+            <span className="ml-2 text-sm font-medium text-gray-700">
+              ({currentLevelInfo.rang})
+            </span>
+          )}
         </div>
       </div>
 

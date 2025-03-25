@@ -9,6 +9,12 @@
   --shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   --border-radius: 8px;
   --spacing-unit: 1rem;
+  --danger-color: #e74c3c;
+  --success-color: #2ecc71;
+  --transition-speed: 0.2s;
+  --hover-accent: #2980b9;
+  --hover-danger: #c0392b;
+  --hover-success: #27ae60;
 }
 
 /* Reset et styles de base */
@@ -86,7 +92,7 @@ select {
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius);
   font-size: 1rem;
-  transition: border-color 0.2s;
+  transition: border-color var(--transition-speed);
 }
 
 input:focus,
@@ -111,11 +117,11 @@ button {
   border-radius: var(--border-radius);
   cursor: pointer;
   font-weight: 500;
-  transition: background-color 0.2s;
+  transition: background-color var(--transition-speed);
 }
 
 button:hover {
-  background-color: #2980b9;
+  background-color: var(--hover-accent);
 }
 
 /* Styles pour l'affichage */
@@ -183,48 +189,42 @@ button:hover {
   border-radius: var(--border-radius);
 }
 
-.competence-name {
-  width: 100%;
-}
-
-.competence-level {
-  width: 100%;
-}
-
+.competence-name,
+.competence-level,
 .competence-specialization {
   width: 100%;
 }
 
 .delete-skill {
   padding: 0.5rem 1rem;
-  background-color: #e74c3c;
+  background-color: var(--danger-color);
   color: white;
   border: none;
   border-radius: var(--border-radius);
   cursor: pointer;
   font-weight: bold;
-  transition: background-color 0.2s;
+  transition: background-color var(--transition-speed);
 }
 
 .delete-skill:hover {
-  background-color: #c0392b;
+  background-color: var(--hover-danger);
 }
 
 .add-skill {
   width: 100%;
   padding: 0.75rem;
-  background-color: #2ecc71;
+  background-color: var(--success-color);
   color: white;
   border: none;
   border-radius: var(--border-radius);
   cursor: pointer;
   font-weight: 500;
-  transition: background-color 0.2s;
+  transition: background-color var(--transition-speed);
   margin-top: 1rem;
 }
 
 .add-skill:hover {
-  background-color: #27ae60;
+  background-color: var(--hover-success);
 }
 
 /* Responsive */
@@ -493,12 +493,14 @@ button:hover {
   display: flex;
   align-items: center;
   gap: 1rem;
+  margin-bottom: 1rem;
 }
 
 .stat-input-group {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  flex: 1;
 }
 
 .stat-button {
@@ -518,13 +520,21 @@ button:hover {
   transition: background-color 0.2s;
 }
 
-.stat-button:hover {
+.stat-button:hover:not(:disabled) {
   background-color: #2980b9;
+}
+
+.stat-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
 }
 
 .stat-input-group input {
   width: 4rem;
   text-align: center;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: var(--border-radius);
 }
 
 .stats-section {
@@ -558,48 +568,4 @@ button:hover {
   text-align: center;
   font-weight: 500;
   font-size: 1.1rem;
-}
-
-.stat-group {
-  display: flex;
-  align-items: center;
-  margin-bottom: 1rem;
-}
-
-.stat-input-group {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.stat-button {
-  background-color: var(--accent-color);
-  color: white;
-  border: none;
-  border-radius: var(--border-radius);
-  width: 2rem;
-  height: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-size: 1.2rem;
-  transition: background-color 0.2s;
-}
-
-.stat-button:hover:not(:disabled) {
-  background-color: var(--accent-color-dark);
-}
-
-.stat-button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-
-.stat-input-group input {
-  width: 4rem;
-  text-align: center;
-  padding: 0.5rem;
-  border: 1px solid #ddd;
-  border-radius: var(--border-radius);
 }
