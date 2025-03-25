@@ -1,6 +1,7 @@
 import { useState, useCallback, useEffect } from 'react';
 import { Character, DerivedStats } from '../types/Character';
 import { getMassModifier } from '../utils/massModifiers';
+import { getSkillLevelInfo } from '../types/SkillLevel';
 
 interface FileSystemHandle {
   createWritable(): Promise<FileSystemWritableFileStream>;
@@ -181,9 +182,10 @@ export const useCharacter = () => {
   }, [handleStatChange]);
 
   const ajouterCompetence = useCallback(() => {
+    const levelInfo = getSkillLevelInfo(1);
     setCharacter(prev => ({
       ...prev,
-      competences: [...prev.competences, { nom: '', niveau: 1, specialisation: '' }]
+      competences: [...prev.competences, { nom: '', niveau: 1, rang: levelInfo?.rang || 'Novice', specialisation: '' }]
     }));
   }, []);
 
@@ -283,11 +285,15 @@ export const useCharacter = () => {
                 esprit: data.character.esprit ?? 0,
                 charisme: data.character.charisme ?? 0,
                 pouvoir: data.character.pouvoir ?? 0,
-                competences: data.character.competences?.map((comp: { nom: string; niveau: string; specialisation?: string }) => ({
-                  nom: comp.nom || '',
-                  niveau: comp.niveau || '0',
-                  specialisation: comp.specialisation || '',
-                })) || [],
+                competences: data.character.competences?.map((comp: { nom: string; niveau: number; specialisation?: string; rang?: string }) => {
+                  const levelInfo = getSkillLevelInfo(comp.niveau || 1);
+                  return {
+                    nom: comp.nom || '',
+                    niveau: comp.niveau || 1,
+                    rang: comp.rang || levelInfo?.rang || 'Novice',
+                    specialisation: comp.specialisation || '',
+                  };
+                }) || [],
               };
 
               const processedStats: DerivedStats = {

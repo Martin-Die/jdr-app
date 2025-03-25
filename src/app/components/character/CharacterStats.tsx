@@ -1,5 +1,4 @@
 import { Character } from '../../types/Character';
-import { getSkillLevelInfo } from '../../types/SkillLevel';
 
 interface CharacterStatsProps {
   character: Character;
@@ -10,7 +9,7 @@ interface CharacterStatsProps {
 type StatKey = 'force' | 'agilite' | 'perception' | 'constitution' | 'esprit' | 'charisme' | 'pouvoir';
 
 const MIN_STAT = -3;
-const MAX_LEVEL = 8;
+const MAX_LEVEL = 99;
 
 export const CharacterStats = ({ character, onInputChange, pointsDisponibles }: CharacterStatsProps) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,8 +40,6 @@ export const CharacterStats = ({ character, onInputChange, pointsDisponibles }: 
       onInputChange('niveau', newLevel);
     };
   };
-
-  const currentLevelInfo = getSkillLevelInfo(character.niveau || 1);
 
   const stats = [
     { id: 'force', label: 'Force' },
@@ -87,11 +84,6 @@ export const CharacterStats = ({ character, onInputChange, pointsDisponibles }: 
           >
             +
           </button>
-          {currentLevelInfo && (
-            <span>
-              <strong>({currentLevelInfo.rang})</strong>
-            </span>
-          )}
         </div>
       </div>
 

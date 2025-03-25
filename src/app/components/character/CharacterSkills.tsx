@@ -1,6 +1,7 @@
 import { Character } from '../../types/Character';
 import { competencesList } from '../../data/competences';
 import { Tooltip } from '../ui/Tooltip';
+import { getSkillLevelInfo } from '../../types/SkillLevel';
 
 interface CharacterSkillsProps {
   character: Character;
@@ -22,7 +23,9 @@ export const CharacterSkills = ({
   const handleNiveauChange = (index: number, increment: boolean) => {
     const currentValue = character.competences[index].niveau || 0;
     const newValue = increment ? currentValue + 1 : currentValue - 1;
+    const levelInfo = getSkillLevelInfo(newValue);
     onCompetenceChange(index, 'niveau', newValue);
+    onCompetenceChange(index, 'rang', levelInfo?.rang || 'Novice');
   };
 
   return (
@@ -74,14 +77,19 @@ export const CharacterSkills = ({
                 className="stat-button"
                 onClick={() => handleNiveauChange(index, false)}
                 aria-label="Diminuer le niveau"
-                disabled={comp.niveau <= 1}
+                disabled={comp.niveau <= 0}
               >
                 -
               </button>
               <input
                 type="number"
                 value={comp.niveau}
-                onChange={(e) => onCompetenceChange(index, 'niveau', e.target.value === '' ? 1 : Number(e.target.value))}
+                onChange={(e) => {
+                  const newValue = e.target.value === '' ? 1 : Number(e.target.value);
+                  const levelInfo = getSkillLevelInfo(newValue);
+                  onCompetenceChange(index, 'niveau', newValue);
+                  onCompetenceChange(index, 'rang', levelInfo?.rang || 'Novice');
+                }}
                 className="competence-level"
                 min={1}
               />
@@ -89,7 +97,7 @@ export const CharacterSkills = ({
                 className="stat-button"
                 onClick={() => handleNiveauChange(index, true)}
                 aria-label="Augmenter le niveau"
-                disabled={comp.niveau >= 5}
+                disabled={comp.niveau >= 8}
               >
                 +
               </button>

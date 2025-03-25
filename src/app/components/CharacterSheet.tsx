@@ -6,6 +6,7 @@ import { CharacterStats } from './character/CharacterStats';
 import { CharacterSkills } from './character/CharacterSkills';
 import { getMassModifier } from '../utils/massModifiers';
 import { Tooltip } from './ui/Tooltip';
+import { getSkillLevelInfo } from '../types/SkillLevel';
 
 export default function CharacterSheet() {
   const {
@@ -149,7 +150,7 @@ export default function CharacterSheet() {
               <p key={index}>
                 <strong>{comp.nom} </strong>
                 <span className="value">
-                  Niveau {comp.niveau}
+                  Niveau {comp.niveau} ({comp.rang || getSkillLevelInfo(comp.niveau || 1)?.rang || 'Novice'})
                   {comp.specialisation && ` (${comp.specialisation})`}
                 </span>
               </p>
